@@ -1,0 +1,14 @@
+{
+  "name": "linter-swiftlint",
+  "linter-package": true,
+  "activationCommands": [],
+  "main": "./lib/init",
+  "version": "0.0.0",
+  "description": "Lint Swift files using swiftlint to offer style advice",
+  "repository": "https://github.com/k2b6s9j/linter-swiftlint",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {}
+}
