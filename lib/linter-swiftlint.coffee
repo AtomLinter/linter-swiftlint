@@ -1,40 +1,54 @@
-linterPath = atom.packages.getLoadedPackage("linter").path
-Linter = require "#{linterPath}/lib/linter"
-path = require 'path'
+module.exports = LinterSwiftlint =
+  activate: ->
+    console.log 'activate linter-swiftlint'# if atom.inDevMode()
+    unless atom.packages.getLoadedPackages 'linter-plus'
+      @showError '[Linter+ swiftlint] `linter-plus` package not found,
+       please install it'
 
-module.exports = class LinterSwiftlint extends Linter
-  # The syntax that the linter handles. May be a string or
-  # list/tuple of strings. Names should be all lowercase.
-  @syntax: ['source.swift']
-  # A string, list, tuple or callable that returns a string, list or tuple,
-  # containing the command line (with arguments) used to lint.
-  cmd: 'swiftlint lint'
-  linterName: 'swiftlint'
-  errorStream: 'stdout'
-  # A regex pattern used to extract information from the executable's output.
-  # Beacuse swiftc is essentially a specialized clang, I am using the regex from
-  #   from linter-clang.
-  regex: '.+:(?<line>\\d+): ((?<error>error)|(?<warning>warning)): ' +
-    '(?<message>.*)'
+  showError: (message = '') ->
+    atom.notifications.addError message
 
-  constructor: (editor) ->
-    super(editor)
-    @listen = atom.config.observe 'linter-swiftlint.liveLinting', (value) =>
-      @lintLive = value
+  provideLinter: ->
+    {
+      scopes: ['source.swift']
+      lint: @lint
+      lintOnFly: true
+    }
 
-  lintFile: (filePath, callback) ->
-    if @lintLive
-      file = (path.basename do @editor.getPath)
-    else
-      file = filePath
-    # add file to regex to filter output to this file,
-    # need to change filename a bit to fit into regex
-    @regex = file.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&") +
-      ':(?<line>\\d+): ((?<error>error)|(?<warning>warning)): (?<message>.*)'
-    super(file, callback)
-    console.log "linter-swiftlint: command = #{@cmd}" if atom.inDevMode()
+  lint: (TextEditor) ->
+    CP = require 'child_process'
+    Path = require 'path'
+    XRegExp = require('xregexp').XRegExp
 
-  destroy: ->
-    @listen.dispose()
+    regex = XRegExp('(?<file>\\S+):(?<line>\\d+):(?<column>\\d+):
+     ((?<error>error)|(?<warning>warning)): (?<message>.*)')
 
-module.exports = LinterSwiftlint
+    return new Promise (Resolve) ->
+      FilePath = TextEditor.getPath()
+      return unless FilePath # Files that have not be saved
+      Data = []
+      Process = CP.exec("swiftlint lint #{TextEditor.getTitle()}",
+        {cwd: Path.dirname(FilePath)})
+      Process.stdout.on 'data', (data) -> Data.push(data.toString())
+      Process.on 'close', ->
+        Content = []
+        for line in Data
+          Content.push XRegExp.exec(line, regex)
+        ToReturn = []
+        Content.forEach (regex) ->
+          if regex
+            if regex.error
+              ToReturn.push(
+                Type: 'Error',
+                Message: regex.message,
+                File: regex.file
+                Position: [[regex.line, regex.column], [regex.line, regex.column]]
+              )
+            if regex.warning
+              ToReturn.push(
+                Type: 'Warning',
+                Message: regex.message,
+                File: regex.file
+                Position: [[regex.line, regex.column], [regex.line, regex.column]]
+              )
+        Resolve(ToReturn)

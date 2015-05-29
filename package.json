@@ -1,8 +1,7 @@
 {
   "name": "linter-swiftlint",
-  "linter-package": true,
   "activationCommands": [],
-  "main": "./lib/init",
+  "main": "./lib/linter-swiftlint",
   "version": "0.1.0",
   "description": "Lint Swift files using swiftlint to offer style advice",
   "repository": "https://github.com/k2b6s9j/linter-swiftlint",
@@ -10,5 +9,14 @@
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {}
+  "providedServices": {
+    "linter-plus": {
+      "versions": {
+        "0.1.0": "provideLinter"
+      }
+    }
+  },
+  "dependencies": {
+    "xregexp": "2.0.0"
+  }
 }
