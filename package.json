@@ -1,6 +1,5 @@
 {
   "name": "linter-swiftlint",
-  "activationCommands": [],
   "main": "./lib/linter-swiftlint",
   "version": "0.1.0",
   "description": "Lint Swift files using swiftlint to offer style advice",

@@ -1,6 +1,6 @@
 module.exports = LinterSwiftlint =
   activate: ->
-    console.log 'activate linter-swiftlint'# if atom.inDevMode()
+    console.log 'activate linter-swiftlint' if atom.inDevMode()
     unless atom.packages.getLoadedPackages 'linter-plus'
       @showError '[Linter+ swiftlint] `linter-plus` package not found,
        please install it'
@@ -11,17 +11,17 @@ module.exports = LinterSwiftlint =
   provideLinter: ->
     {
       scopes: ['source.swift']
+      scope: 'file'
       lint: @lint
-      lintOnFly: true
+      lintOnFly: false
     }
 
-  lint: (TextEditor) ->
+  lint: (TextEditor, TextBuffer) ->
     CP = require 'child_process'
     Path = require 'path'
     XRegExp = require('xregexp').XRegExp
 
-    regex = XRegExp('(?<file>\\S+):(?<line>\\d+):(?<column>\\d+):
-     ((?<error>error)|(?<warning>warning)): (?<message>.*)')
+    regex = XRegExp(':(?<line>\\d+): ((?<error>error)|(?<warning>warning)): (?<message>.*)')
 
     return new Promise (Resolve) ->
       FilePath = TextEditor.getPath()
@@ -34,6 +34,7 @@ module.exports = LinterSwiftlint =
         Content = []
         for line in Data
           Content.push XRegExp.exec(line, regex)
+          console.log "linter-swiftlint: #{line}" if atom.inDevMode()
         ToReturn = []
         Content.forEach (regex) ->
           if regex
@@ -41,14 +42,20 @@ module.exports = LinterSwiftlint =
               ToReturn.push(
                 Type: 'Error',
                 Message: regex.message,
-                File: regex.file
-                Position: [[regex.line, regex.column], [regex.line, regex.column]]
+                File: FilePath
+                Position: [
+                  [regex.line, 0],
+                  [regex.line, TextBuffer.lineLengthForRow(regex.line)]
+                ]
               )
             if regex.warning
               ToReturn.push(
                 Type: 'Warning',
                 Message: regex.message,
-                File: regex.file
-                Position: [[regex.line, regex.column], [regex.line, regex.column]]
+                File: FilePath
+                Position: [
+                  [regex.line, 0],
+                  [regex.line, TextBuffer.lineLengthForRow(regex.line)]
+                ]
               )
         Resolve(ToReturn)
