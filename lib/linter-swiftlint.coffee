@@ -40,20 +40,20 @@ module.exports = LinterSwiftlint =
           if regex
             if regex.error
               ToReturn.push(
-                Type: 'Error',
-                Message: regex.message,
-                File: FilePath
-                Position: [
+                type: 'error',
+                message: regex.message,
+                file: FilePath
+                position: [
                   [regex.line, 0],
                   [regex.line, TextBuffer.lineLengthForRow(regex.line)]
                 ]
               )
             if regex.warning
               ToReturn.push(
-                Type: 'Warning',
-                Message: regex.message,
-                File: FilePath
-                Position: [
+                type: 'warning',
+                message: regex.message,
+                file: FilePath
+                position: [
                   [regex.line, 0],
                   [regex.line, TextBuffer.lineLengthForRow(regex.line)]
                 ]
