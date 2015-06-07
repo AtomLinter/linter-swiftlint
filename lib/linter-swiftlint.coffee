@@ -11,9 +11,8 @@ module.exports = LinterSwiftlint =
   provideLinter: ->
     {
       scopes: ['source.swift']
-      scope: 'file'
+      scope: 'project'
       lint: @lint
-      lintOnFly: false
     }
 
   lint: (TextEditor, TextBuffer) ->
