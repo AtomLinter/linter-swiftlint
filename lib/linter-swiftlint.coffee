@@ -21,13 +21,13 @@ module.exports = LinterSwiftlint =
     Path = require 'path'
     XRegExp = require('xregexp').XRegExp
 
-    regex = XRegExp(':(?<line>\\d+): ((?<error>error)|(?<warning>warning)): (?<message>.*)')
+    regex = XRegExp('(?<file>.+):(?<line>\\d+):\\s(?<type>\\w+):\\s(?<message>.*)')
 
     return new Promise (Resolve) ->
       FilePath = TextEditor.getPath()
       return unless FilePath # Files that have not be saved
       Data = []
-      Process = CP.exec("swiftlint lint #{TextEditor.getTitle()}",
+      Process = CP.exec("swiftlint lint",
         {cwd: Path.dirname(FilePath)})
       Process.stdout.on 'data', (data) -> Data.push(data.toString())
       Process.on 'close', ->
@@ -38,24 +38,17 @@ module.exports = LinterSwiftlint =
         ToReturn = []
         Content.forEach (regex) ->
           if regex
-            if regex.error
-              ToReturn.push(
-                type: 'error',
-                message: regex.message,
-                file: FilePath
-                position: [
-                  [regex.line, 0],
-                  [regex.line, TextBuffer.lineLengthForRow(regex.line)]
-                ]
-              )
-            if regex.warning
-              ToReturn.push(
-                type: 'warning',
-                message: regex.message,
-                file: FilePath
-                position: [
-                  [regex.line, 0],
-                  [regex.line, TextBuffer.lineLengthForRow(regex.line)]
-                ]
-              )
+            console.log "linter-swiftlint file: #{regex.file}" if atom.inDevMode()
+            console.log "linter-swiftlint line: #{regex.line}" if atom.inDevMode()
+            console.log "linter-swiftlint type: #{regex.type}" if atom.inDevMode()
+            console.log "linter-swiftlint message: #{regex.message}" if atom.inDevMode()
+            ToReturn.push(
+              type: regex.type,
+              message: regex.message,
+              file: regex.file
+              position: [
+                [regex.line, 0],
+                [regex.line, 0]
+              ]
+            )
         Resolve(ToReturn)
