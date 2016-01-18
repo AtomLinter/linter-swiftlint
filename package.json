@@ -1,14 +1,45 @@
 {
   "name": "linter-swiftlint",
-  "linter-package": true,
-  "activationCommands": [],
   "main": "./lib/init",
   "version": "0.1.0",
   "description": "Lint Swift files using swiftlint to offer style advice",
+  "keywords": [
+    "lint",
+    "swift",
+    "SwiftLint"
+  ],
   "repository": "https://github.com/k2b6s9j/linter-swiftlint",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {}
+  "os": [
+    "darwin"
+  ],
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
+  "dependencies": {
+    "atom-linter": "^3.2.0",
+    "atom-package-deps": "^3.0.2",
+    "fs-plus": "2.x"
+  },
+  "package-deps": [
+    "language-swift",
+    "linter"
+  ],
+  "coffeelintConfig": {
+    "indentation" : {
+        "level" : "error",
+        "value" : 2
+    },
+    "max_line_length": {
+      "value": 100,
+      "level": "error"
+    }
+  }
 }

@@ -1,4 +1,4 @@
-linter-swiftc
+linter-swiftlint
 =========================
 
 This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to SwiftLint's styling advice. Used with files that have the `Swift` syntax.
