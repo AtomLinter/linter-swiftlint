@@ -14,8 +14,12 @@ $ apm install linter-swiftlint
 ```
 
 ## Settings
-Using the Settings for the Package you may change the state of any of these properties to change how files are linted:
-- `Live Linting` when enabled lints the current state of the current file in a temporary directory, this breaks relative requirements, but this mode is useful if writing a script. When disabled the file is linted in the directory it's saved in at save and opening, keeping in tact relative requirements.
+You can configure linter-swiftlint by editing ~/.atom/config.cson (choose Open Your Config in Atom menu):
+```cson
+  "linter-swiftlint":
+    configurationPath: ".swiftlint.yml"
+    swiftlintExecutablePath: "/usr/local/bin/swiftlint"
+```
 
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
