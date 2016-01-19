@@ -4,7 +4,6 @@ linter-swiftlint
 This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to SwiftLint's styling advice. Used with files that have the `Swift` syntax.
 
 ## Installation
-Linter package must be installed in order to use this plugin. If Linter is not installed, please follow the instructions [here](https://github.com/AtomLinter/Linter).
 
 As well, install [SwiftLint](https://github.com/realm/SwiftLint).
 
