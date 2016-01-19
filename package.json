@@ -1,7 +1,7 @@
 {
   "name": "linter-swiftlint",
   "main": "./lib/init",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Lint Swift files using swiftlint to offer style advice",
   "keywords": [
     "lint",
@@ -33,9 +33,9 @@
     "linter"
   ],
   "coffeelintConfig": {
-    "indentation" : {
-        "level" : "error",
-        "value" : 2
+    "indentation": {
+      "level": "error",
+      "value": 2
     },
     "max_line_length": {
       "value": 100,
