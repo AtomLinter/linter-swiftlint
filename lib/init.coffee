@@ -16,7 +16,7 @@ module.exports =
     helpers = require('atom-linter')
     path = require('path')
     fs = require('fs-plus')
-    regex = '(?<file>[^:]+):(?<line>\\d+):(?<col>\\d+)?:?\\s(?<type>\\w+):\\s(?<message>.*)'
+    regex = '([^:]+):(?<line>\\d+):(?<col>\\d+)?:?\\s(?<type>\\w+):\\s(?<message>.*)'
     provider =
       grammarScopes: ['source.swift']
       scope: 'file'
