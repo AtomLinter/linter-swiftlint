@@ -4,6 +4,11 @@ module.exports =
       type: 'string'
       title: 'the path to SwiftLint\'s configuration file that relative to project or absolute'
       default: '.swiftlint.yml'
+    additionalOptions:
+      type: 'string'
+      title: 'additional options to SwiftLint\'s `lint` command
+              other than `--config` and `--use-stdin`'
+      default: ''
     swiftlintExecutablePath:
       type: 'string'
       title: 'the path to SwiftLint'
@@ -36,6 +41,8 @@ module.exports =
             .find -> true # take first item if exists
 
         parameters = parameters.concat ["--config", config] if config and fs.existsSync(config)
+        additionalOptions = atom.config.get('linter-swiftlint.additionalOptions')
+        parameters = parameters.concat additionalOptions if additionalOptions
         options = {stdin: input, throwOnStdErr: false}
         helpers.exec(command, parameters, options).then (output) ->
           helpers.parse(output, regex, {filePath: filePath})
