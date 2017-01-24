@@ -2,16 +2,17 @@ module.exports =
   config:
     configurationPath:
       type: 'string'
-      title: 'the path to SwiftLint\'s configuration file that relative to project or absolute'
+      title: 'Configuration Path'
+      description: 'SwiftLint\'s configuration file that relative to project or absolute'
       default: '.swiftlint.yml'
     additionalOptions:
       type: 'string'
-      title: 'additional options to SwiftLint\'s `lint` command
-              other than `--config` and `--use-stdin`'
+      title: 'Additional Options'
+      description: 'SwiftLint\'s `lint` command options other than `--config` and `--use-stdin`'
       default: ''
     swiftlintExecutablePath:
       type: 'string'
-      title: 'the path to SwiftLint'
+      title: 'The Path to SwiftLint'
       default: '/usr/local/bin/swiftlint'
 
   activate: ->
