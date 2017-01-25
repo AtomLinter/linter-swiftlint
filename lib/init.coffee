@@ -2,12 +2,10 @@ module.exports =
   config:
     configurationPath:
       type: 'string'
-      title: 'Configuration Path'
       description: 'SwiftLint\'s configuration file that relative to project or absolute'
       default: '.swiftlint.yml'
     additionalOptions:
       type: 'string'
-      title: 'Additional Options'
       description: 'SwiftLint\'s `lint` command options other than `--config` and `--use-stdin`'
       default: ''
     swiftlintExecutablePath:
