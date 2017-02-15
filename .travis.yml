@@ -7,7 +7,8 @@ env:
     - ATOM_CHANNEL=beta
 
 install:
-  - brew update && brew install swiftlint
+  - brew update
+  - brew outdated swiftlint || brew upgrade swiftlint
 
 ### Generic setup follows ###
 script:
