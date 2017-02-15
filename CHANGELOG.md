@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.2.2](https://github.com/AtomLinter/linter-swiftlint/tree/v1.2.2) (2017-02-15)
+[Full Changelog](https://github.com/AtomLinter/linter-swiftlint/compare/v1.2.1...v1.2.2)
+
+**Implemented enhancements:**
+
+- Update atom-linter to the latest version 🚀 [\#45](https://github.com/AtomLinter/linter-swiftlint/pull/45) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+- Update Travis-CI configuration [\#43](https://github.com/AtomLinter/linter-swiftlint/pull/43) ([Arcanemagus](https://github.com/Arcanemagus))
+
+**Fixed bugs:**
+
+- Update Travis-CI configuration [\#43](https://github.com/AtomLinter/linter-swiftlint/pull/43) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.2.1](https://github.com/AtomLinter/linter-swiftlint/tree/v1.2.1) (2017-01-31)
 [Full Changelog](https://github.com/AtomLinter/linter-swiftlint/compare/v1.2.0...v1.2.1)
 
