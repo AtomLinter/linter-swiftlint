@@ -42,6 +42,6 @@ module.exports =
         parameters = parameters.concat ["--config", config] if config and fs.existsSync(config)
         additionalOptions = atom.config.get('linter-swiftlint.additionalOptions')
         parameters = parameters.concat additionalOptions if additionalOptions
-        options = {ignoreExitCode: true, stdin: input, throwOnStdErr: false}
+        options = {ignoreExitCode: true, stdin: input, throwOnStderr: false}
         helpers.exec(command, parameters, options).then (output) ->
           helpers.parse(output, regex, {filePath: filePath})
