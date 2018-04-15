@@ -1,30 +1,32 @@
 ### Project specific config ###
-language: objective-c
-osx_image: xcode8.2
+language: node_js
+node_js: lts/*
+os: osx
 
 env:
   matrix:
     - ATOM_CHANNEL=stable
     - ATOM_CHANNEL=beta
 
-install:
+before_install:
   - brew update
   - brew outdated swiftlint || brew upgrade swiftlint
 
 ### Generic setup follows ###
-script:
+install:
   - curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
   - chmod u+x build-package.sh
   - ./build-package.sh
 
-notifications:
-  email:
-    on_success: never
-    on_failure: change
+script:
+  - commitlint-travis
 
-branches:
-  only:
-    - master
+after_success:
+  # Add apm to the PATH
+  - export PATH=${PATH}:${HOME}/atom/usr/bin/
 
-git:
-  depth: 10
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - npx semantic-release

@@ -3,19 +3,16 @@
   "main": "./lib/init",
   "version": "1.2.2",
   "description": "Lint Swift files using swiftlint to offer style advice",
-  "keywords": [
-    "lint",
-    "swift",
-    "SwiftLint"
-  ],
-  "repository": "https://github.com/k2b6s9j/linter-swiftlint",
+  "keywords": ["lint", "swift", "SwiftLint"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AtomLinter/linter-swiftlint.git"
+  },
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "os": [
-    "darwin"
-  ],
+  "os": ["darwin"],
   "providedServices": {
     "linter": {
       "versions": {
@@ -28,10 +25,7 @@
     "atom-package-deps": "^4.0.1",
     "fs-plus": "3.0.2"
   },
-  "package-deps": [
-    "language-swift",
-    "linter"
-  ],
+  "package-deps": ["language-swift", "linter"],
   "coffeelintConfig": {
     "indentation": {
       "level": "error",
@@ -41,5 +35,22 @@
       "value": 100,
       "level": "error"
     }
+  },
+  "release": {
+    "extends": "@semantic-release/apm-config"
+  },
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^6.1.3",
+    "@commitlint/config-conventional": "^6.1.3",
+    "@commitlint/travis-cli": "^6.1.3",
+    "@semantic-release/apm-config": "^2.0.1",
+    "husky": "^0.14.3",
+    "semantic-release": "^15.1.7"
+  },
+  "scripts": {
+    "commitmsg": "commitlint -e $GIT_PARAMS"
   }
 }
