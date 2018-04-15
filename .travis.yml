@@ -21,12 +21,25 @@ install:
 script:
   - commitlint-travis
 
-after_success:
-  # Add apm to the PATH
-  - export PATH=${PATH}:${HOME}/atom/usr/bin/
+jobs:
+  include:
+    - stage: release
+      node_js: lts/*
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npx semantic-release
 
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - npx semantic-release
+jobs:
+  include:
+    - stage: release
+      node_js: lts/*
+      script:
+        - ls -R ./
+        - export PATH=${PATH}:./atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npx semantic-release
