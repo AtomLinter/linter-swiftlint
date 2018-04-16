@@ -1,3 +1,13 @@
+<a name="1.2.3"></a>
+## [1.2.3](https://github.com/AtomLinter/linter-swiftlint/compare/v1.2.2...v1.2.3) (2018-04-16)
+
+
+### Bug Fixes
+
+* **package:** update atom-linter to version 10.0.0 🚀 ([#48](https://github.com/AtomLinter/linter-swiftlint/issues/48)) ([89ba440](https://github.com/AtomLinter/linter-swiftlint/commit/89ba440))
+* **package:** update fs-plus to version 3.0.0 ([#47](https://github.com/AtomLinter/linter-swiftlint/issues/47)) ([5a68de4](https://github.com/AtomLinter/linter-swiftlint/commit/5a68de4)), closes [#46](https://github.com/AtomLinter/linter-swiftlint/issues/46)
+* **package:** update fs-plus to version 3.0.2 ([#49](https://github.com/AtomLinter/linter-swiftlint/issues/49)) ([6d05e46](https://github.com/AtomLinter/linter-swiftlint/commit/6d05e46))
+
 # Change Log
 
 ## [v1.2.2](https://github.com/AtomLinter/linter-swiftlint/tree/v1.2.2) (2017-02-15)
