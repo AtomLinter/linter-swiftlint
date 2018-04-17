@@ -1,5 +1,5 @@
 describe 'The swiftlint provider for Linter', ->
-  lint = require('../lib/init').provideLinter().lint
+  lint = require('../src/index').provideLinter().lint
 
   beforeEach ->
     atom.workspace.destroyActivePaneItem()
