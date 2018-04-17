@@ -1,6 +1,6 @@
-import helpers = require("atom-linter");
-import path = require("path");
-import fs = require("fs");
+import * as helpers from "atom-linter";
+import * as path from "path";
+import * as fs from "fs";
 import { TextEditor } from "atom";
 import { LintResult, LinterProvider } from "atom/linter";
 

@@ -1,5 +1,4 @@
-import { TextEditor } from "atom";
-import { LinterProvider, LintResult } from "atom/linter";
+import { LinterProvider } from "atom/linter";
 
 class SwiftLintLinter {
   public activate(): void {
