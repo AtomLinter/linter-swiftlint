@@ -21,7 +21,7 @@ const provider: LinterProvider = {
       return null;
     }
 
-    let parameters = ["lint", "--use-stdin"];
+    const parameters = ["lint", "--use-stdin"];
     let config = path.normalize(
       atom.config.get("linter-swiftlint.configurationPath")
     );
@@ -36,14 +36,14 @@ const provider: LinterProvider = {
     }
 
     if (config && fs.existsSync(config)) {
-      parameters = parameters.concat(["--config", config]);
+      parameters.push("--config", config);
     }
 
     const additionalOptions = atom.config.get(
       "linter-swiftlint.additionalOptions"
     );
     if (additionalOptions) {
-      parameters = parameters.concat(additionalOptions);
+      parameters.push(additionalOptions);
     }
 
     const options = {
