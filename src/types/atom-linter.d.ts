@@ -26,7 +26,7 @@ declare module "atom-linter" {
     textEditor: TextEditor,
     lineNumber: number,
     colStart: number
-  ): Array<Range>;
+  ): Range;
 
   export function find(
     directory: string,
