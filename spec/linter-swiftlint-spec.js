@@ -35,6 +35,6 @@ describe("The swiftlint provider for Linter", () => {
       const messages = await lint(editor);
 
       expect(messages.length).toEqual(1);
-      expect(messages[0].range).toEqual([[2, 0], [2, 0]]);
+      expect(messages[0].location.position).toEqual([[2, 0], [2, 3]]);
     }));
 });

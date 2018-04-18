@@ -3,7 +3,7 @@ import { LinterProvider } from "atom/linter";
 // Internal variables
 const idleCallbacks = new Set();
 
-const makeIdleCallback = (work: any) => {
+const makeIdleCallback = (work: () => void) => {
   let callbackId: RequestIdleCallbackHandle;
   const callBack = () => {
     idleCallbacks.delete(callbackId)
@@ -14,12 +14,13 @@ const makeIdleCallback = (work: any) => {
 }
 
 class SwiftLintLinter {
+  private static installPeers() {
+    require("atom-package-deps").install("linter-swiftlint");
+  }
+
   public activate(): void {
-    const linterSwiftLintInstallPeerPackages = () => {
-      require("atom-package-deps").install("linter-swiftlint");
-    }
     if (!atom.inSpecMode()) {
-      makeIdleCallback(linterSwiftLintInstallPeerPackages);
+      makeIdleCallback(SwiftLintLinter.installPeers);
     }
   }
 

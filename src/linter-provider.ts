@@ -61,7 +61,7 @@ const provider: LinterProvider = {
 
     const messages: Message[] = [];
     let match = regex.exec(output);
-    while (match !== null) {
+    if (match) {
       const line = Math.max(Number.parseInt(match[1], 10) - 1, 0);
       const col = Math.max(Number.parseInt(match[2], 10) - 1, 0);
       let position: Range;
@@ -81,7 +81,7 @@ const provider: LinterProvider = {
 
       messages.push({
         severity,
-        excerpt: match[3],
+        excerpt: match[4],
         location: {
           file: filePath,
           position,
