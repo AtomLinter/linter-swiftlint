@@ -14,6 +14,12 @@ const provider: LinterProvider = {
   lintsOnChange: true,
   lint: async (textEditor: TextEditor): Promise<LintResult> => {
     const filePath = textEditor.getPath();
+
+    if (!filePath) {
+      // The current TextEditor has no path associated with it.
+      return null;
+    }
+
     const input = textEditor.getText();
 
     const command = atom.config.get("linter-swiftlint.swiftlintExecutablePath");
