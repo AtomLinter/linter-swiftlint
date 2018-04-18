@@ -1,6 +1,6 @@
 {
   "name": "linter-swiftlint",
-  "main": "./lib/init",
+  "main": "./src/index",
   "version": "1.2.3",
   "description": "Lint Swift files using swiftlint to offer style advice",
   "keywords": [
@@ -14,34 +14,25 @@
   },
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=1.13.0 <2.0.0"
   },
   "providedServices": {
     "linter": {
       "versions": {
-        "1.0.0": "provideLinter"
+        "2.0.0": "provideLinter"
       }
     }
   },
   "dependencies": {
     "atom-linter": "^10.0.0",
     "atom-package-deps": "^4.0.1",
-    "fs-plus": "3.0.2"
+    "atom-ts-transpiler": "^1.5.2",
+    "typescript": "^2.8.1"
   },
   "package-deps": [
     "language-swift",
     "linter"
   ],
-  "coffeelintConfig": {
-    "indentation": {
-      "level": "error",
-      "value": 2
-    },
-    "max_line_length": {
-      "value": 100,
-      "level": "error"
-    }
-  },
   "release": {
     "extends": "@semantic-release/apm-config"
   },
@@ -55,10 +46,40 @@
     "@commitlint/config-conventional": "^6.1.3",
     "@commitlint/travis-cli": "^6.1.3",
     "@semantic-release/apm-config": "^2.0.1",
+    "@types/atom": "^1.25.1",
+    "@types/node": "^9.6.5",
     "husky": "^0.14.3",
     "semantic-release": "^15.1.7"
   },
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "atomTranspilers": [
+    {
+      "transpiler": "atom-ts-transpiler",
+      "glob": "{!(node_modules)/**/,}*.ts?(x)",
+      "options": {
+        "compilerOptions": {},
+        "cacheKeyFiles": [],
+        "verbose": false
+      }
+    }
+  ],
+  "configSchema": {
+    "configurationPath": {
+      "type": "string",
+      "description": "SwiftLint's configuration file, it can be relative to the project or an absolute path.",
+      "default": ".swiftlint.yml"
+    },
+    "additionalOptions": {
+      "type": "string",
+      "description": "SwiftLint's `lint` command options, other than `--config` and `--use-stdin`.",
+      "default": ""
+    },
+    "swiftlintExecutablePath": {
+      "type": "string",
+      "title": "The Path to SwiftLint",
+      "default": "/usr/local/bin/swiftlint"
+    }
   }
 }
