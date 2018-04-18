@@ -54,7 +54,7 @@ const provider: LinterProvider = {
 
     const output = await helpers.exec(command, parameters, options);
 
-    return helpers.parse(output, regex, { filePath: filePath });
+    return helpers.parse(output, regex, { filePath });
   }
 };
 
