@@ -1,3 +1,23 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/AtomLinter/linter-swiftlint/compare/v1.2.3...v1.3.0) (2018-04-18)
+
+
+### Bug Fixes
+
+* **engine:** use better Atom version ([449de7c](https://github.com/AtomLinter/linter-swiftlint/commit/449de7c))
+* **performance:** install dependencies in an idle callback ([6e691e8](https://github.com/AtomLinter/linter-swiftlint/commit/6e691e8))
+* **style:** don't specify variable name twice ([01c1f25](https://github.com/AtomLinter/linter-swiftlint/commit/01c1f25))
+* **types:** fix generateRange return type ([6314dfb](https://github.com/AtomLinter/linter-swiftlint/commit/6314dfb))
+* **ux:** fix setting descriptions ([bb61ce3](https://github.com/AtomLinter/linter-swiftlint/commit/bb61ce3))
+* do not infinite loop when matching ([ef5b930](https://github.com/AtomLinter/linter-swiftlint/commit/ef5b930))
+* don't rewrite parameters on every change ([8347bd5](https://github.com/AtomLinter/linter-swiftlint/commit/8347bd5))
+* verify the TextEditor has a path ([11df60e](https://github.com/AtomLinter/linter-swiftlint/commit/11df60e))
+
+
+### Features
+
+* **ux:** return Linter v2 messages ([6c499b7](https://github.com/AtomLinter/linter-swiftlint/commit/6c499b7))
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/AtomLinter/linter-swiftlint/compare/v1.2.2...v1.2.3) (2018-04-16)
 
