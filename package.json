@@ -68,12 +68,12 @@
   "configSchema": {
     "configurationPath": {
       "type": "string",
-      "description": "SwiftLint's configuration file that relative to project or absolute",
+      "description": "SwiftLint's configuration file, it can be relative to the project or an absolute path.",
       "default": ".swiftlint.yml"
     },
     "additionalOptions": {
       "type": "string",
-      "description": "SwiftLint's `lint` command options other than `--config` and `--use-stdin`",
+      "description": "SwiftLint's `lint` command options, other than `--config` and `--use-stdin`.",
       "default": ""
     },
     "swiftlintExecutablePath": {
