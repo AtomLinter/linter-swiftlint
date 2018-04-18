@@ -1,11 +1,10 @@
 import * as helpers from "atom-linter";
 import * as path from "path";
 import * as fs from "fs";
-import { TextEditor } from "atom";
-import { LintResult, LinterProvider } from "atom/linter";
+import { TextEditor, Range } from "atom";
+import { LintResult, LinterProvider, Message } from "atom/linter";
 
-const regex =
-  "([^:]+):(?<line>\\d+):(?<col>\\d+)?:?\\s(?<type>\\w+):\\s(?<message>.*)";
+const regex = /(?:[^:]+):(\d+):(\d+)?:?\s(\w+):\s(.*)/;
 
 const provider: LinterProvider = {
   name: "SwiftLint",
@@ -60,7 +59,37 @@ const provider: LinterProvider = {
 
     const output = await helpers.exec(command, parameters, options);
 
-    return helpers.parse(output, regex, { filePath });
+    const messages: Message[] = [];
+    let match = regex.exec(output);
+    while (match !== null) {
+      const line = Math.max(Number.parseInt(match[1], 10) - 1, 0);
+      const col = Math.max(Number.parseInt(match[2], 10) - 1, 0);
+      let position: Range;
+      try {
+        position = helpers.generateRange(textEditor, line, col);
+      } catch(e) {
+        // If the position wasn't valid, just return the start of the file
+        // NOTE: Ideally this would handle the error and give the user an easy
+        // way to report it for eventual fixing.
+        position = new Range([0, 0], [0, Number.POSITIVE_INFINITY]);
+      }
+
+      const type = match[3].toLowerCase();
+      const severity =
+        type === 'error' || type === 'warning' || type === 'info' ?
+        type : 'error';
+
+      messages.push({
+        severity,
+        excerpt: match[3],
+        location: {
+          file: filePath,
+          position,
+        }
+      });
+    }
+
+    return messages;
   }
 };
 
