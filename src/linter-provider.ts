@@ -4,7 +4,7 @@ import * as fs from "fs";
 import { TextEditor, Range } from "atom";
 import { LintResult, LinterProvider, Message } from "atom/linter";
 
-const regex = /(?:[^:]+):(\d+):(\d+)?:?\s(\w+):\s(.*)/;
+const regex = /(?:[^:]+):(\d+):(\d+)?:?\s(\w+):\s(.*)/g;
 
 const provider: LinterProvider = {
   name: "SwiftLint",
@@ -61,7 +61,7 @@ const provider: LinterProvider = {
 
     const messages: Message[] = [];
     let match = regex.exec(output);
-    if (match) {
+    while (match !== null) {
       const line = Math.max(Number.parseInt(match[1], 10) - 1, 0);
       const col = Math.max(Number.parseInt(match[2], 10) - 1, 0);
       let position: Range;
@@ -87,6 +87,9 @@ const provider: LinterProvider = {
           position,
         }
       });
+
+      // Pull in the next result (if any)
+      match = regex.exec(output);
     }
 
     return messages;
