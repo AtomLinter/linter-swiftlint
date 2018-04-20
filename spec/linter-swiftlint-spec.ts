@@ -1,3 +1,16 @@
+import * as path from "path";
+
+// Make files in Linter results relative, so that they are consistent across environments.
+expect.addSnapshotSerializer({
+  test: val => val && val.hasOwnProperty("file") && path.isAbsolute(val.file),
+  print: (val, serialize) => {
+    return serialize({
+      ...val,
+      file: path.relative(__filename, val.file)
+    });
+  }
+});
+
 describe("The swiftlint provider for Linter", () => {
   const { lint } = require("../src/index").provideLinter();
 

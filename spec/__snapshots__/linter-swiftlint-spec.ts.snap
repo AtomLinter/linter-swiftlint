@@ -7,7 +7,7 @@ Array [
   Object {
     "excerpt": "Identifier Name Violation: Variable name should be between 3 and 40 characters long: 's' (identifier_name)",
     "location": Object {
-      "file": "/Users/kepler/Developer/AtomLinter/linter-swiftlint/spec/fixtures/not-well-formed.swift",
+      "file": "../fixtures/not-well-formed.swift",
       "position": Array [
         Array [
           2,
