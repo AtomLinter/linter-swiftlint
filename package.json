@@ -47,8 +47,11 @@
     "@commitlint/travis-cli": "^6.1.3",
     "@semantic-release/apm-config": "^2.0.1",
     "@types/atom": "^1.25.1",
+    "@types/jest": "^22.2.3",
     "@types/node": "^9.6.5",
+    "atom-test-runner-jest": "^0.2.0",
     "husky": "^0.14.3",
+    "jest-preset-atom": "^0.2.1",
     "semantic-release": "^15.1.7"
   },
   "scripts": {
@@ -81,5 +84,9 @@
       "title": "The Path to SwiftLint",
       "default": "/usr/local/bin/swiftlint"
     }
+  },
+  "atomTestRunner": "atom-test-runner-jest",
+  "jest": {
+    "preset": "jest-preset-atom"
   }
 }
