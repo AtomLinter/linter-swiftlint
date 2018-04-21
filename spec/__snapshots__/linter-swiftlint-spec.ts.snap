@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The swiftlint provider for Linter finds nothing wrong with a well formed file 1`] = `Array []`;
+
+exports[`The swiftlint provider for Linter finds something wrong with a not well formed file 1`] = `
+Array [
+  Object {
+    "excerpt": "Identifier Name Violation: Variable name should be between 3 and 40 characters long: 's' (identifier_name)",
+    "location": Object {
+      "file": "../fixtures/not-well-formed.swift",
+      "position": Array [
+        Array [
+          2,
+          0,
+        ],
+        Array [
+          2,
+          3,
+        ],
+      ],
+    },
+    "severity": "error",
+  },
+]
+`;
