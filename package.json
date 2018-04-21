@@ -55,7 +55,8 @@
     "semantic-release": "^15.1.7"
   },
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "test": "atom --test spec"
   },
   "atomTranspilers": [
     {
