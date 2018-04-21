@@ -16,13 +16,26 @@ before_install:
 install:
   - curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
   - chmod u+x build-package.sh
-  - ./build-package.sh
+  - "./build-package.sh"
 
 script:
   - commitlint-travis
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+branches:
+  only:
+    - master
+    - "/^greenkeeper/.*$/"
+
+git:
+  depth: 10
+
+stages:
+  - test
+  - name: release
+    if: (NOT type = pull_request) AND branch = master
 
 jobs:
   include:
