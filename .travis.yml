@@ -24,6 +24,11 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
+stages:
+  - test
+  - name: release
+    if: (NOT type = pull_request) AND branch = master
+
 jobs:
   include:
     - stage: release
