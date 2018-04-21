@@ -51,7 +51,7 @@
     "@types/node": "^9.6.5",
     "atom-test-runner-jest": "^0.2.0",
     "husky": "^0.14.3",
-    "jest-preset-atom": "^0.2.1",
+    "jest-preset-atom": "^0.2.2",
     "semantic-release": "^15.1.7"
   },
   "scripts": {
@@ -88,6 +88,8 @@
   },
   "atomTestRunner": "atom-test-runner-jest",
   "jest": {
-    "preset": "jest-preset-atom"
+    "preset": "jest-preset-atom",
+    "collectCoverage": true,
+    "coverageReporters": ["json", "text"]
   }
 }
