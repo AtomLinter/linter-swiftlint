@@ -88,6 +88,8 @@
   },
   "atomTestRunner": "atom-test-runner-jest",
   "jest": {
-    "preset": "jest-preset-atom"
+    "preset": "jest-preset-atom",
+    "collectCoverage": true,
+    "coverageReporters": ["json", "text"]
   }
 }

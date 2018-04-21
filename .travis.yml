@@ -11,6 +11,7 @@ env:
 before_install:
   - brew update
   - brew outdated swiftlint || brew upgrade swiftlint
+  - npm install codecov -g
 
 ### Generic setup follows ###
 install:
@@ -20,6 +21,9 @@ install:
 
 script:
   - commitlint-travis
+
+after_success:
+  - codecov
 
 jobs:
   include:
