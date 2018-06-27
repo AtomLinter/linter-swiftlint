@@ -45,7 +45,7 @@
     "@commitlint/cli": "^6.1.3",
     "@commitlint/config-conventional": "^6.1.3",
     "@commitlint/travis-cli": "^6.1.3",
-    "@semantic-release/apm-config": "^2.0.1",
+    "@semantic-release/apm-config": "^3.0.0",
     "@types/atom": "^1.25.1",
     "@types/jest": "^22.2.3",
     "@types/node": "^10.0.3",
