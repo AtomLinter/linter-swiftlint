@@ -50,7 +50,7 @@
     "@types/jest": "^22.2.3",
     "@types/node": "^10.0.3",
     "atom-test-runner-jest": "^0.2.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "jest-preset-atom": "^0.2.2",
     "semantic-release": "^15.1.7"
   },
